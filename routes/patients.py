@@ -7,9 +7,7 @@ patients_bp = Blueprint('patients', __name__)
 @patients_bp.route('/', methods=['GET'])
 def get_all_patients():
     patients = PatientService.get_all_patients()
-    return jsonify(patients)
-    patients = Patient.query.all()
-    return jsonify([patient.serialize() for patient in patients]), 200
+    return jsonify(patients), 200
 
 
 # @patients_bp.route('/', methods=['POST'])
