@@ -1,6 +1,4 @@
-
-from app import db
-from sqlalchemy import JSON
+from database import db
 
 
 class Patient(db.Model):
@@ -12,8 +10,10 @@ class Patient(db.Model):
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'))
 
     # Relationships
-    medical_history = db.relationship('MedicalHistory', backref='patient', lazy=True)
-    appointments = db.relationship('Appointment', backref='patient', lazy=True)
+    medical_history_entries = db.relationship('MedicalHistory', back_populates='patient', lazy=True,
+                                              cascade='all, delete-orphan')
+    appointments_assigned = db.relationship('Appointment', back_populates='patient', lazy=True,
+                                            cascade='all, delete-orphan')
 
     def serialize(self):
         return {
@@ -22,9 +22,9 @@ class Patient(db.Model):
             'age': self.age,
             'gender': self.gender,
             'contact_info': self.contact_info,
-            'doctor_id': self.doctor_id,  # Include doctor_id in serialization
-            'medical_history': [history.serialize() for history in self.medical_history],
-            'appointments': [appointment.serialize() for appointment in self.appointments]
+            'doctor_id': self.doctor_id,
+            'medical_history': [history.serialize() for history in self.medical_history_entries],
+            'appointments': [appointment.serialize() for appointment in self.appointments_assigned]
         }
 
 
@@ -33,9 +33,16 @@ class Doctor(db.Model):
     name = db.Column(db.String(100), nullable=False)
     specialization = db.Column(db.String(100))
     contact_info = db.Column(db.String(100))
-    availability_schedule = db.Column(JSON)
+    availability_schedule = db.Column(db.JSON)
+    department_id = db.Column(db.Integer, db.ForeignKey('department.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
 
-    appointments = db.relationship('Appointment', backref='doctor', lazy=True)
+    # Define the relationship with Department
+    department = db.relationship('Department', back_populates='doctors')
+
+    # Relationships
+    appointments = db.relationship('Appointment', back_populates='doctor', lazy=True,
+                                   cascade='all, delete-orphan')
 
     def serialize(self):
         return {
@@ -43,7 +50,8 @@ class Doctor(db.Model):
             'name': self.name,
             'specialization': self.specialization,
             'contact_info': self.contact_info,
-            'availability_schedule': self.availability_schedule
+            'availability_schedule': self.availability_schedule,
+            'department_id': self.department_id
         }
 
 
@@ -53,7 +61,7 @@ class Department(db.Model):
     services_offered = db.Column(db.String(255))
 
     # Relationships
-    doctors = db.relationship('Doctor', backref='department', lazy=True)
+    doctors = db.relationship('Doctor', back_populates='department', lazy=True)
 
     def serialize(self):
         return {
@@ -71,7 +79,8 @@ class MedicalHistory(db.Model):
     allergies = db.Column(db.String(255))
     medications = db.Column(db.String(255))
 
-    patient = db.relationship('Patient', backref=db.backref('medical_history', cascade='all, delete-orphan'))
+    # Relationships
+    patient = db.relationship('Patient', back_populates='medical_history_entries')
 
     def serialize(self):
         return {
@@ -88,8 +97,9 @@ class Appointment(db.Model):
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=False)
     appointment_date = db.Column(db.DateTime)
 
-    patient = db.relationship('Patient', backref=db.backref('appointments', cascade='all, delete-orphan'))
-    doctor = db.relationship('Doctor', backref=db.backref('appointments', cascade='all, delete-orphan'))
+    # Relationships
+    patient = db.relationship('Patient', back_populates='appointments_assigned')
+    doctor = db.relationship('Doctor', back_populates='appointments')
 
     def serialize(self):
         return {
