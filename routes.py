@@ -8,10 +8,10 @@ departments_bp = Blueprint('departments', __name__)
 appointments_bp = Blueprint('appointments', __name__)
 search_bp = Blueprint('search', __name__)
 
-from patient_service import PatientService
-from doctor_service import DoctorService
-from department_service import DepartmentService
-from appointment_service import AppointmentService
+from services.patient_service import PatientService
+from services.doctor_service import DoctorService
+from services.department_service import DepartmentService
+from services.appointment_service import AppointmentService
 
 
 # ------------------------------------- Patient Routes ------------------------------
