@@ -1,7 +1,7 @@
 # Hospital-Management-System
 
 ### Setting Up the Application
-```
+
 Clone the Repository:
 
 Begin by cloning the repository using git. If you don't have git installed, you can download it from https://git-scm.com/. Open your terminal and navigate to your desired directory. Then, run the following command:
