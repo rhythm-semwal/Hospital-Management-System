@@ -20,7 +20,7 @@ cd flask-tutorial
 ### Install the required Python libraries using pip:
 
 ```bash
-pip install flask flask-sqlalchemy
+pip3 install flask flask-sqlalchemy
 ```
 ### Create the Database:
 
@@ -33,7 +33,7 @@ Run the following command in your terminal to start the development server:
 
 
 ```bash
-python app.py
+python3 app.py
 ```
 
 This will start the Flask development server. By default, it will run on http://127.0.0.1:5000/. You can access the application in your web browser by going to this URL.
