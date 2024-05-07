@@ -35,10 +35,13 @@ class Doctor(db.Model):
     contact_info = db.Column(db.String(100))
     availability_schedule = db.Column(db.JSON)
     department_id = db.Column(db.Integer, db.ForeignKey('department.id'))
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    # patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
 
     # Define the relationship with Department
     department = db.relationship('Department', back_populates='doctors')
+
+    # Define the relationship with Patient
+    patients = db.relationship('Patient', backref='assigned_doctor', lazy=True)
 
     # Relationships
     appointments = db.relationship('Appointment', back_populates='doctor', lazy=True,
