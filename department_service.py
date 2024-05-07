@@ -122,3 +122,16 @@ class DepartmentService:
             return {'services_offered': department.services_offered}, 200
         except Exception as e:
             return {'error': f'Failed to retrieve department: {str(e)}'}, 500
+
+    @staticmethod
+    def search_departments(filter_criteria: dict, page: int = 1, per_page: int = 10):
+        query = Department.query
+
+        for key, value in filter_criteria.items():
+            if value:
+                query = query.filter(getattr(Department, key) == value)
+
+        offset = (page - 1) * per_page
+        departments = query.limit(per_page).offset(offset).all()
+
+        return [department.serialize() for department in departments]

@@ -1,7 +1,7 @@
 import os
 from flask import Flask, Blueprint, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from routes import patients_bp, doctors_bp, departments_bp, appointments_bp
+from routes import patients_bp, doctors_bp, departments_bp, appointments_bp, search_bp
 from database import db
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -32,6 +32,7 @@ app.register_blueprint(patients_bp)
 app.register_blueprint(doctors_bp)
 app.register_blueprint(departments_bp)
 app.register_blueprint(appointments_bp)
+app.register_blueprint(search_bp)
 
 
 @app.route('/', methods=['GET'])

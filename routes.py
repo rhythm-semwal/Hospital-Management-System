@@ -6,6 +6,7 @@ patients_bp = Blueprint('patients', __name__)
 doctors_bp = Blueprint('doctors', __name__)
 departments_bp = Blueprint('departments', __name__)
 appointments_bp = Blueprint('appointments', __name__)
+search_bp = Blueprint('search', __name__)
 
 from patient_service import PatientService
 from doctor_service import DoctorService
@@ -360,3 +361,50 @@ def get_doctor_appointments(doctor_id):
 
     except Exception as e:
         return jsonify({'error': f'Internal server error: {str(e)}'}), 500
+
+# ------------------------- Search -------------------
+
+
+@search_bp.route('/search/patients', methods=['GET'])
+def search_patients():
+    filter_criteria = {}
+    for key in request.args:
+        filter_criteria[key] = request.args[key]
+
+    page = int(filter_criteria.pop('page', 1))
+    limit = int(filter_criteria.pop('limit', 10))
+    limit = min(limit, 100)
+
+    patients = PatientService.search_patients(filter_criteria, page=page, per_page=limit)
+
+    return jsonify(patients), 200
+
+
+@search_bp.route('/search/doctors', methods=['GET'])
+def search_doctors():
+    filter_criteria = {}
+    for key in request.args:
+        filter_criteria[key] = request.args[key]
+
+    page = int(filter_criteria.pop('page', 1))
+    limit = int(filter_criteria.pop('limit', 10))
+    limit = min(limit, 100)
+
+    doctors = DoctorService.search_doctors(filter_criteria, page=page, per_page=limit)
+
+    return jsonify(doctors), 200
+
+
+@search_bp.route('/search/departments', methods=['GET'])
+def search_departments():
+    filter_criteria = {}
+    for key in request.args:
+        filter_criteria[key] = request.args[key]
+
+    page = int(filter_criteria.pop('page', 1))
+    limit = int(filter_criteria.pop('limit', 10))
+    limit = min(limit, 100)
+
+    departments = DepartmentService.search_departments(filter_criteria, page=page, per_page=limit)
+
+    return jsonify(departments), 200

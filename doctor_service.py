@@ -114,3 +114,17 @@ class DoctorService:
         except Exception as e:
             db.session.rollback()
             return False, f'Error while assigning Patient to Doctor: {str(e)}'
+
+    @staticmethod
+    def search_doctors(filter_criteria: dict, page: int = 1, per_page: int = 10):
+        query = Doctor.query
+
+        for key, value in filter_criteria.items():
+            if value:
+                query = query.filter(getattr(Doctor, key) == value)
+
+        # Apply pagination
+        offset = (page - 1) * per_page
+        doctors = query.limit(per_page).offset(offset).all()
+
+        return [doctor.serialize() for doctor in doctors]

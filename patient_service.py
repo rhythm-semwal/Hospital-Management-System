@@ -93,3 +93,16 @@ class PatientService:
             return [history.serialize() for history in medical_history] if medical_history else [], 200
         except Exception as e:
             return {'error': f'Failed to retrieve Patient: {str(e)}'}, 500
+
+    @staticmethod
+    def search_patients(filter_criteria: dict, page: int = 1, per_page: int = 10):
+        query = Patient.query
+
+        for key, value in filter_criteria.items():
+            if value:
+                query = query.filter(getattr(Patient, key) == value)
+
+        offset = (page - 1) * per_page
+        patients = query.limit(per_page).offset(offset).all()
+
+        return [patient.serialize() for patient in patients]
