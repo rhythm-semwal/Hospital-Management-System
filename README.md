@@ -1,5 +1,17 @@
 # Hospital-Management-System
 
+### Project Structure
+The project consists of the following files and folders:
+
+
+**app.py**: This is the main Flask application file. It configures the database connection, registers blueprints for different functionalities, and defines routes.
+
+**database.py**: This file contains the database configuration using Flask-SQLAlchemy.
+
+**routes.py**: This file defines blueprints for managing Patients, Doctors, Departments, and Appointments. Each blueprint handles routes and logic related to its specific functionality.
+
+**models.py**: This file likely defines the data models for Patients, Doctors, Departments, and Appointments. These models represent the database schema.
+
 ### Setting Up the Application
 
 Clone the Repository:
@@ -55,26 +67,16 @@ This will start the Flask development server. By default, it will run on http://
 Once the server is running, open http://127.0.0.1:5000/ in your web browser. You should see a JSON response with the message "Hello World!". This confirms that the application is running successfully.
 
 ### API Testing
-```text
+
 The Hospital Management System.postman_collection.json file contains all the REST APIs. Import it into Postman for testing.
-```
+
 
 ### Run Test Cases
 ```
 python3 tests/test_routes.py
 ```
 
-### Project Structure
-The project consists of the following files and folders:
 
-
-**app.py**: This is the main Flask application file. It configures the database connection, registers blueprints for different functionalities, and defines routes.
-
-**database.py**: This file contains the database configuration using Flask-SQLAlchemy.
-
-**routes.py**: This file defines blueprints for managing Patients, Doctors, Departments, and Appointments. Each blueprint handles routes and logic related to its specific functionality. (This file might not be included in the current version you have)
-
-**models.py**: This file likely defines the data models for Patients, Doctors, Departments, and Appointments. These models represent the database schema. (This file might not be included in the current version you have)
 
 
 
