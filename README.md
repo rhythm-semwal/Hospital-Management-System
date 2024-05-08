@@ -54,6 +54,16 @@ This will start the Flask development server. By default, it will run on http://
 
 Once the server is running, open http://127.0.0.1:5000/ in your web browser. You should see a JSON response with the message "Hello World!". This confirms that the application is running successfully.
 
+### API Testing
+```text
+The Hospital Management System.postman_collection.json file contains all the REST APIs. Import it into Postman for testing.
+```
+
+### Run Test Cases
+```
+python3 tests/test_routes.py
+```
+
 ### Project Structure
 The project consists of the following files and folders:
 
