@@ -1,6 +1,4 @@
-import json
-
-from models import Doctor, Patient
+from models.models import Doctor, Patient
 from database import db
 
 

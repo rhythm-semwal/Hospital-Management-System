@@ -1,4 +1,4 @@
-from models import Appointment, Patient, Doctor
+from models.models import Appointment, Patient, Doctor
 from database import db
 
 

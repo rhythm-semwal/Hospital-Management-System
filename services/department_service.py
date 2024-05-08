@@ -1,4 +1,4 @@
-from models import Department, Doctor
+from models.models import Department, Doctor
 from database import db
 
 
