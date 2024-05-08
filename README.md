@@ -27,6 +27,35 @@ Navigate to the project directory using the following command:
 ```bash
 cd Hospital-Management-System
 ```
+## Option1 - Using Docker
+
+```bash
+docker pull python:3.8-slim-buster
+```
+
+```bash
+sudo docker build --tag hms ./
+```
+
+```bash
+docker images
+```
+
+```bash
+docker run -d -p 5000:5000 python-docker
+```
+
+**Visit http://localhost:5000**
+
+```bash
+docker ps
+```
+
+```bash
+docker stop <container id>
+```
+
+## Option 2 - From terminal
 
 ### Create a Virtual Environment
 ```bash
@@ -68,7 +97,7 @@ Once the server is running, open http://127.0.0.1:5000/ in your web browser. You
 
 ### API Testing
 
-The Hospital Management System.postman_collection.json file contains all the REST APIs. Import it into Postman for testing.
+**The Hospital Management System.postman_collection.json file contains all the REST APIs. Import it into Postman for testing.**
 
 
 ### Run Test Cases
