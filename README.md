@@ -7,14 +7,26 @@ Clone the Repository:
 Begin by cloning the repository using git. If you don't have git installed, you can download it from https://git-scm.com/. Open your terminal and navigate to your desired directory. Then, run the following command:
 
 ```bash
-git clone https://github.com/rhythm-semwal/flask-tutorial.git
+git clone https://github.com/rhythm-semwal/Hospital-Management-System.git
 ```
-### Install Dependencies:
 
 Navigate to the project directory using the following command:
 
 ```bash
-cd flask-tutorial
+cd Hospital-Management-System
+```
+
+### Create a Virtual Environment
+```bash
+python3 -m venv .venv
+```
+
+```bash
+source .venv/bin/activate
+```
+
+```bash
+<directory path>.venv/bin/python3 -m pip install --upgrade pip
 ```
 
 ### Install the required Python libraries using pip:
