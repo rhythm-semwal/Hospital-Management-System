@@ -1,6 +1,5 @@
 import os
-from flask import Flask, Blueprint, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
 from routes import patients_bp, doctors_bp, departments_bp, appointments_bp, search_bp
 from database import db
 
@@ -41,5 +40,5 @@ def index():
 
 
 if __name__ == '__main__':
-    db.create_all()
+    # db.create_all()
     app.run(debug=True)
