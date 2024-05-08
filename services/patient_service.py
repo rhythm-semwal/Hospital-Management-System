@@ -1,4 +1,4 @@
-from models import Patient, MedicalHistory
+from models.models import Patient, MedicalHistory
 from database import db
 
 
